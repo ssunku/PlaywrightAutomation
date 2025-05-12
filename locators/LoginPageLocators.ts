@@ -1,26 +1,26 @@
-import {Page, Locator} from '@playwright/test'
+import { Page, Locator } from '@playwright/test'
 
- export class LoginPageLocators{
+export class LoginPageLocators {
 
-     page:Page
+    page: Page
 
-     constructor(page:Page){
-        this.page=page;
+    constructor(page: Page) {
+        this.page = page;
 
     }
-    get getLoginEmail(): Locator{
+    get getLoginEmail(): Locator {
 
         return this.page.locator("//input[@name='username']|//*[@resource-id='userNameTxt']//input");
 
     }
 
-    get getLoginPassword(): Locator{
+    get getLoginPassword(): Locator {
 
         return this.page.locator("//input[@name='password']|//*[@resource-id='passwordTxt']//input");
 
     }
 
-    get getSignInBtn():Locator{
+    get getSignInBtn(): Locator {
         return this.page.locator("//*[@resource-id='signInBtn']");
     }
 }

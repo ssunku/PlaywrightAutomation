@@ -1,25 +1,26 @@
+import { Page,Browser, BrowserContext } from '@playwright/test';
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
-test('has title', async ({ page }) => {
 
+ let page:Page;
+ let context:BrowserContext;
+
+ test.beforeAll(async ({browser})=>{
+  context= await browser.newContext();
+  page=await context.newPage();
+ });
+
+test('has title',{}, async ({}) => {
   const loginPage=new LoginPage(page);
-  
   await page.goto('https://phoenix.kube.gcp-qa.clh-int.com/');
   await loginPage.enterEmailText("castlight_user@castlighthealth.com")
   await loginPage.enterPassword("monkey55")
   await loginPage.clickOnSignInBtn();
-
-  // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle("Castlight | Login");
 });
 
-/*test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});*/
+test.afterEach('clean up after each test',async ({ },testInfo)=>{
+ await console.log("Status is"+testInfo.status)
+ await page.close();
+});
