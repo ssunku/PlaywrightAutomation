@@ -2,12 +2,20 @@
   "name": "playwrightautomation",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pretest": "ts-node --esm utils/login.setup.ts",
+    "test": "playwright test"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@playwright/test": "^1.51.1",
-    "@types/node": "^22.14.0"
-  }
+    "@types/node": "^22.15.18",
+    "axe-core": "^4.10.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.2"
+  },
+  "type": "module"
 }

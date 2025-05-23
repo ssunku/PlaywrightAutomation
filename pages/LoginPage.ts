@@ -23,6 +23,4 @@ export class LoginPage {
   async clickOnSignInBtn() {
     await this.loginPageLocators.getSignInBtn.click();
   }
-
-
 }

@@ -13,8 +13,9 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+ 
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -29,14 +30,32 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on-first-retry', 
   },
 
   /* Configure projects for major browsers */
   projects: [
+     /* {
+      name: 'setup',
+      use: { ...devices['Desktop Chrome'], 
+      channel: 'chrome', 
+      viewport: { width: 1620, height: 1080 },
+      
+      },
+      testMatch: 'utils/login.spec.ts'
+      
+    },*/
     {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome'  },
+      name: 'chrome',
+      use: { ...devices['Desktop Chrome'], 
+      channel: 'chrome', 
+      headless: false, 
+      viewport: { width: 1620, height: 1080 },
+      
+     // storageState: ".auth/user.json"
+      },
+      testMatch:'homepage.spec.ts'
+      //dependencies: ['setup']
     }
 
     /* {
